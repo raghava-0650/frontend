@@ -84,3 +84,8 @@
 }
 
 
+
+.btn-cont{
+  display: flex;
+  gap: 250px;
+}
