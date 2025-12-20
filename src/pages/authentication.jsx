@@ -8,7 +8,6 @@ import Divider from '@mui/material/Divider';
 import FormControl from '@mui/material/FormControl';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import FormLabel from '@mui/material/FormLabel';
-import Link from '@mui/material/Link';
 import { styled } from '@mui/material/styles';
 import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
@@ -97,23 +96,57 @@ export default function Authentication() {
         variant="h4"
         sx={{ width: '100%', fontSize: 'clamp(2rem, 10vw, 2.15rem)' }}
       >
-        Sign in
+        Gotta go through it first!!!
       </Typography>
+
+      <div class = "btn-cont">
+        <Button type="button" halfWidth variant={formState === 0 ? "contained": ""} onClick={()=>{setFormState(0)}}>
+        log in
+        </Button>
+        
+        <Button type="button" halfWidth variant={formState === 1 ? "contained" : ""} onClick={()=>{setFormState(1)}}>
+        Sign up 
+        </Button>
+      </div>
+
+
+
       <Box
         component="form"
         noValidate
         sx={{ display: 'flex', flexDirection: 'column', width: '100%', gap: 2 }}
       >
+
         <FormControl>
-          <FormLabel htmlFor="email">Email</FormLabel>
+          <p>{name}</p>
+          
+            {formState === 1 ? (
+              <TextField
+                error={passwordError}
+                helperText={passwordErrorMessage}
+                name="fullname"
+                
+                type="text"
+                id="fullname"
+                onChange={(e)=>setName(e.target.value)}
+                autoFocus
+                required
+                fullWidth
+                variant="outlined"
+                color={passwordError ? 'error' : 'primary'}
+              />
+            ) : <></>}
+          </FormControl>
+          
+
+        <FormControl>
+          <FormLabel htmlFor="username">Username</FormLabel>
           <TextField
             error={emailError}
             helperText={emailErrorMessage}
-            id="email"
-            type="email"
-            name="email"
-            placeholder="your@email.com"
-            autoComplete="email"
+            id="username"
+            type="username"
+            name="username"
             autoFocus
             required
             fullWidth
@@ -124,24 +157,16 @@ export default function Authentication() {
         <FormControl>
           <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
             <FormLabel htmlFor="password">Password</FormLabel>
-            <Link
-              component="button"
-              type="button"
-              onClick={nothing}
-              variant="body2"
-              sx={{ alignSelf: 'baseline' }}
-            >
-              Forgot your password?
-            </Link>
+            
           </Box>
           <TextField
             error={passwordError}
             helperText={passwordErrorMessage}
             name="password"
-            placeholder="••••••"
+            
             type="password"
             id="password"
-            autoComplete="current-password"
+            
             autoFocus
             required
             fullWidth
@@ -154,9 +179,12 @@ export default function Authentication() {
           label="Remember me"
         />
         
-        <Button type="button" fullWidth variant="contained" onClick={validateInputs}>
-          Sign in
-        </Button>
+        <div>
+          <Button type="button" fullWidth variant="contained" onClick={validateInputs}>
+          submit
+          </Button>
+        </div>
+        
         
       </Box>
       <Divider>or</Divider>
