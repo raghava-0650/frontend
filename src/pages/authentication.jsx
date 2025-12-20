@@ -109,8 +109,6 @@ export default function Authentication() {
         </Button>
       </div>
 
-
-
       <Box
         component="form"
         noValidate
