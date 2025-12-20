@@ -8,6 +8,7 @@ import {
   Routes,
 } from 'react-router-dom';
 
+import Authentication from './pages/Authentication';
 import Landing from './pages/Landing';
 
 const App = () => {
@@ -16,6 +17,7 @@ const App = () => {
       <BrowserRouter>
         <Routes>
           <Route path = '/' element = {<Landing />}></Route>
+          <Route path = '/auth' element = {<Authentication />}></Route>
         </Routes>
       </BrowserRouter>
     </div>
