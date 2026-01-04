@@ -11,6 +11,7 @@ import FormLabel from '@mui/material/FormLabel';
 import { styled } from '@mui/material/styles';
 import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
+
 import { AuthContext } from '../contexts/AuthContext';
 
 //import ForgotPassword from './ForgotPassword';
@@ -53,12 +54,17 @@ export default function Authentication() {
   let handleAuth = async()=>{
     try{
       if(formState === 0){
-        //login
+        let res = await handlelogin(username, password);
+
       }
       if(formState === 1){
         let result = await handleregester(name, username, password);
         setMessage(result);
         setOpen(true);
+        setUsername("");  
+        setError("");
+        setFormState(0);
+        setPassword("");
       }
     }catch(err){
       let message = (err.response.data.message);
@@ -136,9 +142,9 @@ export default function Authentication() {
                 error={passwordError}
                 helperText={passwordErrorMessage}
                 name="fullname"
-                
                 type="text"
                 id="fullname"
+                value={name}
                 onChange={(e)=>setName(e.target.value)}
                 autoFocus
                 required
@@ -158,6 +164,7 @@ export default function Authentication() {
             id="username"
             type="username"
             name="username"
+            value={username}
             autoFocus
             required
             fullWidth
@@ -174,10 +181,9 @@ export default function Authentication() {
             error={passwordError}
             helperText={passwordErrorMessage}
             name="password"
-            
+            value={password}
             type="password"
             id="password"
-            
             autoFocus
             required
             fullWidth
@@ -192,8 +198,8 @@ export default function Authentication() {
         <p style={{color:red}}>*{error}</p>
 
         <div>
-          <Button type="button" fullWidth variant="contained" onClick={validateInputs}>
-          submit
+          <Button type="button" fullWidth variant="contained" onClick={handleAuth}>
+            {formState === 0? "LogIn":"Register"}
           </Button>
         </div>
         
