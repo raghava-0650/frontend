@@ -10,6 +10,7 @@ import {
 
 import Authentication from './pages/Authentication';
 import Landing from './pages/Landing';
+import VideoMeet from './pages/VideoMeet';
 
 const App = () => {
   return (
@@ -18,6 +19,7 @@ const App = () => {
         <Routes>
           <Route path = '/' element = {<Landing />}></Route>
           <Route path = '/auth' element = {<Authentication />}></Route>
+          <Route path = '/:url' element = {<VideoMeet />}></Route>
         </Routes>
       </BrowserRouter>
     </div>

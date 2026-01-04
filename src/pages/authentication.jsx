@@ -8,6 +8,7 @@ import Divider from '@mui/material/Divider';
 import FormControl from '@mui/material/FormControl';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import FormLabel from '@mui/material/FormLabel';
+import Snackbar from '@mui/material/Snackbar';
 import { styled } from '@mui/material/styles';
 import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
@@ -195,7 +196,7 @@ export default function Authentication() {
           control={<Checkbox value="remember" color="primary" />}
           label="Remember me"
         />
-        <p style={{color:red}}>*{error}</p>
+        <p style={{color : "red"}}>*{error}</p>
 
         <div>
           <Button type="button" fullWidth variant="contained" onClick={handleAuth}>
