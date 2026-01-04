@@ -11,6 +11,7 @@ import FormLabel from '@mui/material/FormLabel';
 import { styled } from '@mui/material/styles';
 import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
+import { AuthContext } from '../contexts/AuthContext';
 
 //import ForgotPassword from './ForgotPassword';
 //import { GoogleIcon, FacebookIcon, SitemarkIcon } from './CustomIcons';
@@ -40,18 +41,30 @@ export default function Authentication() {
   const [passwordErrorMessage, setPasswordErrorMessage] = React.useState('');
   const [open, setOpen] = React.useState(false);
   
-
-
   const [username, setUsername] = React.useState();
   const [password, setPassword] = React.useState();
   const [name, setName] = React.useState();
   const [error, setError] = React.useState();
-  const [messages, setMessages] = React.useState();
+  const [message, setMessage] = React.useState();
 
   const [formState, setFormState] = React.useState(0);
-
+  const {handleregester, handlelogin} = React.useContext(AuthContext)
   
-  
+  let handleAuth = async()=>{
+    try{
+      if(formState === 0){
+        //login
+      }
+      if(formState === 1){
+        let result = await handleregester(name, username, password);
+        setMessage(result);
+        setOpen(true);
+      }
+    }catch(err){
+      let message = (err.response.data.message);
+      setError(message);
+    }
+  }
 
   
 
@@ -176,7 +189,8 @@ export default function Authentication() {
           control={<Checkbox value="remember" color="primary" />}
           label="Remember me"
         />
-        
+        <p style={{color:red}}>*{error}</p>
+
         <div>
           <Button type="button" fullWidth variant="contained" onClick={validateInputs}>
           submit
@@ -204,6 +218,13 @@ export default function Authentication() {
           Sign in with Facebook
         </Button>
       </Box>
+      <Snackbar 
+      open = {open}
+      autoHideDuration = {4000}
+      message = {message}
+
+      />
+
     </Card>
   );
 }
